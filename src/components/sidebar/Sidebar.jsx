@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { MdArrowForwardIos } from "react-icons/md";
 import { RiDashboard2Fill } from "react-icons/ri";
 import { SiPeugeot } from "react-icons/si";
+import { FiUsers } from "react-icons/fi";
 
 import Logo from "../../assets/images/Sebmlogo.png";
 import MiniLogo from "../../assets/images/MiniSebmlogo.png";
@@ -42,7 +43,7 @@ const Sidebar = () => {
             <MdArrowForwardIos />
           </div> */}
         </div>
-        {/* Dashboard:::: */}
+        {/* Products:::: */}
         <div className=" flex justify-between items-center text-gray-300 hover:text-white  ">
           <div
             className={`flex items-center gap-2 transition-all duration-300 ease-in-out ${
@@ -55,6 +56,26 @@ const Sidebar = () => {
               className={`sidebar__link font-medium ${sidebarOpen ? "" : "hidden"}`}
             >
               Products
+            </Link>
+          </div>
+          {/* <div className={`sidebar__link ${sidebarOpen ? "ml-10" : "hidden"}`}>
+            <MdArrowForwardIos />
+          </div> */}
+        </div>
+        
+        {/* ‘سثقس:::: */}
+        <div className=" flex justify-between items-center text-gray-300 hover:text-white  ">
+          <div
+            className={`flex items-center gap-2 transition-all duration-300 ease-in-out ${
+              sidebarOpen ? "" : "text-3xl"
+            }`}
+          >
+            <FiUsers className="" />
+            <Link
+              to="/users"
+              className={`sidebar__link font-medium ${sidebarOpen ? "" : "hidden"}`}
+            >
+              Users
             </Link>
           </div>
           {/* <div className={`sidebar__link ${sidebarOpen ? "ml-10" : "hidden"}`}>

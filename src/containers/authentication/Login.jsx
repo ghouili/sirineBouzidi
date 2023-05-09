@@ -174,6 +174,9 @@ const Login = () => {
                     </svg>
                     <span className="ml-3">Sign In</span>
                   </button>
+                  <div className="w-full">
+                    <span className="text-sm font-medium" >You don't have an account ? <Link to="/register" className="text-indigo-500">Sign Up</Link></span>
+                  </div>
                   <div className="w-full flex justify-center">
                     <div className="mt-8 self-center " id="SignInID"></div>
                   </div>
@@ -184,8 +187,10 @@ const Login = () => {
         </div>
         <div className="flex-1 bg-indigo-100 text-center hidden lg:flex">
           <div
-            className="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat bg-[url('https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg')]"
-            // style="background-image: url('https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg');"
+            className="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat 
+            bg-[url('https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg')]
+            "
+            
           ></div>
         </div>
       </div>
