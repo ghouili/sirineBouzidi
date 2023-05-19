@@ -7,44 +7,6 @@ import { path } from "../../utils/Variables";
 import axios from "axios";
 import { GeneralContext } from "../../Hooks/context/GeneralContext";
 
-const products = [
-  {
-    id: 1,
-    model: "V.W ID7",
-    href: "#",
-    imageSrc: "http://localhost:5000/uploads/images/VW_ID7.png",
-    imageAlt: " V.W ID7",
-    price: "$35 000",
-    companie: "Volkswagen",
-  },
-  {
-    id: 2,
-    model: "V.W ID4",
-    href: "#",
-    imageSrc: "http://localhost:5000/uploads/images/VW_ID4.png",
-    imageAlt: " V.W ID4",
-    price: "$35 000",
-    companie: "Volkswagen",
-  },
-  {
-    id: 3,
-    model: "Passat B8",
-    href: "#",
-    imageSrc: "http://localhost:5000/uploads/images/passat.png",
-    imageAlt: " Passat B8",
-    price: "$35 000",
-    companie: "Volkswagen",
-  },
-  {
-    id: 4,
-    model: "Transporter T7",
-    href: "#",
-    imageSrc: "http://localhost:5000/uploads/images/VW_T7.png",
-    imageAlt: "Transporter T7 ",
-    price: "$35 000",
-    companie: "Volkswagen",
-  },
-];
 
 export default function Productslist() {
   const { setProductDetails, addProductsToCart } = useContext(GeneralContext);
@@ -80,7 +42,9 @@ export default function Productslist() {
               capacity,
               qte,
               userid,
-            }) => (
+            }) => {
+              if(qte < 1) { return null;}
+              return (
               <div key={_id} className="relative shadow-md pb-2 bg-white">
                 <div className=" aspect-h-2 aspect-w-3 overflow-hidden rounded-md ">
                   <img
@@ -129,6 +93,7 @@ export default function Productslist() {
                 </div>
               </div>
             )
+          }
           )}
         </div>
       </div>

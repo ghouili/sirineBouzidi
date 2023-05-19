@@ -10,6 +10,7 @@ const ProviderContext = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [productDeatails, setProductDetails] = useState({ open: false });
     const [openCart, setOpenCart] = useState(false);
+    const [openPay, setOpenPay] = useState(false);
     const [theme, setTheme] = useState('light');
 
     const [cartItems, setCartItems] = useState([]);
@@ -86,9 +87,9 @@ const ProviderContext = ({ children }) => {
         });
       
         await saveCartToCookies(cartItems); // pass the updated newItems array to the saveCartToCookies function
-      };
+    };
 
-    const values = { sidebarOpen, theme, productDeatails, openCart, cartItems, setOpenCart, setProductDetails, setSidebarOpen, ToggleSidebar, HandleThemeSwitch, deleteCartFromCookies, addProductsToCart, deleteCartItem, updateCartItemQte };
+    const values = { sidebarOpen, theme, productDeatails, openCart, cartItems, openPay, setCartItems, setOpenPay, setOpenCart, setProductDetails, setSidebarOpen, ToggleSidebar, HandleThemeSwitch, deleteCartFromCookies, addProductsToCart, deleteCartItem, updateCartItemQte };
     return (
         <GeneralContext.Provider value={values} >
             {children}

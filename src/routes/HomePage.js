@@ -8,7 +8,7 @@ const HomePage = () => {
     const cookies = new Cookies();
     let user = cookies.get("user");
 
-    if (!user || user.role === 'user') {
+    if (!user || user.role === 'client') {
         return <Landpage />
     } else {
         return <Dashboard />     

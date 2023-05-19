@@ -13,6 +13,7 @@ import { GeneralContext } from "../../Hooks/context/GeneralContext";
 import { Link, useNavigate } from "react-router-dom";
 import { path } from "../../utils/Variables";
 import { ProductsCart } from "../../containers";
+import Pay from "../payement/Pay";
 
 const Navbar = () => {
   const {
@@ -21,8 +22,10 @@ const Navbar = () => {
     ToggleSidebar,
     HandleThemeSwitch,
     theme,
+    cartItems,
     openCart,
     setOpenCart,
+    openPay, setOpenPay
   } = useContext(GeneralContext);
 
   const cookies = new Cookies();
@@ -112,13 +115,16 @@ const Navbar = () => {
           <div
             className="relative p-2.5 rounded-full cursor-pointer hover:bg-blue-50 text-gray-600 hover:text-blue-400"
             onClick={() => {
+              // setOpenPay(!openPay);
               setOpenCart(!openCart);
             }}
-          >
+          > 
             <HiOutlineShoppingBag size={22} />
+            {cartItems.length === 0 ? null :
             <div className="absolute flex items-center justify-center rounded-full w-4 h-4 bg-blue-500 right-0 top-0 ">
-              <p className="text-xs font-medium text-white ">5</p>
+              <p className="text-xs font-medium text-white ">{cartItems.length}</p>
             </div>
+}
           </div>
           <div
             className=" p-2.5 rounded-full cursor-pointer hover:bg-blue-50 text-gray-600 hover:text-blue-400"
@@ -135,9 +141,10 @@ const Navbar = () => {
           {!user ? null : (
             <div className="relative p-2.5 rounded-full cursor-pointer hover:bg-blue-50 text-gray-600 hover:text-blue-400">
               <BiBell size={22} />
-              <div className="absolute flex items-center justify-center rounded-full w-4 h-4 bg-red-600 right-0 top-0 ">
+              {/* <div 
+              className="absolute flex items-center justify-center rounded-full w-4 h-4 bg-red-600 right-0 top-0 ">
                 <p className="text-xs font-medium text-white ">5</p>
-              </div>
+          </div> */}
             </div>
           )}
           {user ? (
@@ -209,6 +216,10 @@ const Navbar = () => {
       <div className={`${openCart ? "" : "hidden"}`}>
         <ProductsCart />
       </div>
+      <div className={`${openPay ? "" : "hidden"}`}>
+        <Pay />
+      </div>
+
     </>
   );
 };

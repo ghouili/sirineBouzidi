@@ -10,3 +10,5 @@ export { default as ProductsCart} from './cart/ProductsCart';
 export { default as ProductDetails} from './products/ProductDetails';
 export { default as User} from './user/User';
 export { default as Profile} from './user/Profile';
+export { default as Orders} from './orders/Orders';
+export { default as Stock} from './products/Stock';

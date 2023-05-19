@@ -5,6 +5,7 @@ import { MdArrowForwardIos } from "react-icons/md";
 import { RiDashboard2Fill } from "react-icons/ri";
 import { SiPeugeot } from "react-icons/si";
 import { FiUsers } from "react-icons/fi";
+import { GiShoppingCart } from "react-icons/gi";
 
 import Logo from "../../assets/images/Sebmlogo.png";
 import MiniLogo from "../../assets/images/MiniSebmlogo.png";
@@ -43,6 +44,7 @@ const Sidebar = () => {
             <MdArrowForwardIos />
           </div> */}
         </div>
+
         {/* Products:::: */}
         <div className=" flex justify-between items-center text-gray-300 hover:text-white  ">
           <div
@@ -82,6 +84,47 @@ const Sidebar = () => {
             <MdArrowForwardIos />
           </div> */}
         </div>
+
+        {/* orders:::: */}
+        <div className=" flex justify-between items-center text-gray-300 hover:text-white  ">
+          <div
+            className={`flex items-center gap-2 transition-all duration-300 ease-in-out ${
+              sidebarOpen ? "" : "text-3xl"
+            }`}
+          >
+            <GiShoppingCart className="" />
+            <Link
+              to="/orders"
+              className={`sidebar__link font-medium ${sidebarOpen ? "" : "hidden"}`}
+            >
+              Orders
+            </Link>
+          </div>
+          {/* <div className={`sidebar__link ${sidebarOpen ? "ml-10" : "hidden"}`}>
+            <MdArrowForwardIos />
+          </div> */}
+        </div>
+
+        {/* Products:::: */}
+        <div className=" flex justify-between items-center text-gray-300 hover:text-white  ">
+          <div
+            className={`flex items-center gap-2 transition-all duration-300 ease-in-out ${
+              sidebarOpen ? "" : "text-3xl"
+            }`}
+          >
+            <SiPeugeot className="" />
+            <Link
+              to="/stock"
+              className={`sidebar__link font-medium ${sidebarOpen ? "" : "hidden"}`}
+            >
+              Stock 
+            </Link>
+          </div>
+          {/* <div className={`sidebar__link ${sidebarOpen ? "ml-10" : "hidden"}`}>
+            <MdArrowForwardIos />
+          </div> */}
+        </div>
+
       </div>
     </div>
   );

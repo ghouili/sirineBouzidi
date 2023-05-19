@@ -4,6 +4,8 @@ import swal from "sweetalert";
 import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { BsPersonVcard, BsPhone, BsPencilSquare } from "react-icons/bs";
+import { Input, Button } from "@material-tailwind/react";
+
 import { HiOutlineMail } from "react-icons/hi";
 import { TfiLocationPin } from "react-icons/tfi";
 import { IoTrashOutline } from "react-icons/io5";
@@ -38,7 +40,9 @@ const User = () => {
   });
 
   const [data, setData] = useState([]);
-
+  const [filterData, setfilterData] = useState([]);
+  const [masterData, setMasterData] = useState([]);
+  const [search, setSearch] = useState([]);
   //image related
   const [File, setFile] = useState();
   const [previewUrl, setPreviewUrl] = useState();
@@ -59,6 +63,22 @@ const User = () => {
     fileReader.readAsDataURL(File);
   }, [File]);
 
+  /// fitering data using seaarch input ::
+  const searchFilter = (text) => {
+    if (text) {
+      const newData = masterData.filter((item) => {
+        const itemData = Object.values(item).join(" ").toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setfilterData(newData);
+      setSearch(text);
+    } else {
+      setfilterData(masterData);
+      setSearch(text);
+    }
+  };
+
   // handelie uploading image:::
   const pickedHandler = (event) => {
     let pickedFile;
@@ -77,7 +97,9 @@ const User = () => {
 
   const fetchdata = async () => {
     const result = await axios.get(`${path}user`);
-    setData(result.data.data);
+    // setData(result.data.data);
+    setMasterData(result.data.data);
+    setfilterData(result.data.data);
     // console.log(result.data.data);
   };
 
@@ -261,9 +283,8 @@ const User = () => {
       fetchdata();
       CloseModal();
     } else {
-      swal("Error!",  result.data.message, "warning");
+      swal("Error!", result.data.message, "warning");
     }
-
   };
 
   const delete_user = async (id) => {
@@ -289,19 +310,37 @@ const User = () => {
           <span className="font-medium">/</span>
           <span className="">Users</span>
         </div>
-        <div className="flex gap-4 items-center">
+        <div className="w-fit flex gap-10 items-center">
+          <div className="relative flex w-full max-w-[24rem]">
+            <Input
+              type="search"
+              label="Search users.."
+              value={search}
+              onChange={(e) => searchFilter(e.target.value)}
+              className="pr-24 border-blue-700"
+              containerProps={{
+                className: "min-w-0",
+              }}
+            />
+            <Button
+              size="sm"
+              className="!absolute right-1 top-1 rounded bg-blue-700"
+            >
+              Search
+            </Button>
+          </div>
           <button
-            className=" relative inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 "
+            className=" relative w-32 inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 "
             onClick={() => setOpenModal(!openModal)}
           >
-            <span className="relative px-3 py-1.5 transition-all ease-in duration-75 bg-white  rounded-md group-hover:bg-opacity-0">
+            <span className="relative w-full px-3 py-1.5 transition-all ease-in duration-75 bg-white  rounded-md group-hover:bg-opacity-0">
               Add User
             </span>
           </button>
         </div>
       </div>
-      <div className="py-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4">
-        {data
+      <div className="py-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {filterData
           .slice(0)
           .reverse()
           .map(
@@ -413,20 +452,20 @@ const User = () => {
                     className="h-full w-full object-cover object-center rounded-md"
                   />
                   <label
-                      htmlFor="pictureID"
-                      className="absolute p-1 rounded-full bg-purple-50 border border-white -bottom-3 -left-3 text-gray-700 cursor-pointer"
-                    >
-                      <BiEdit size={20} />
-                      <input
-                        type="file"
-                        name="picture"
-                        id="pictureID"
-                        className="hidden"
-                        accept=".jpg,.png,.jpeg"
-                        ref={filePickerRef}
-                        onChange={pickedHandler}
-                      />
-                    </label>
+                    htmlFor="pictureID"
+                    className="absolute p-1 rounded-full bg-purple-50 border border-white -bottom-3 -left-3 text-gray-700 cursor-pointer"
+                  >
+                    <BiEdit size={20} />
+                    <input
+                      type="file"
+                      name="picture"
+                      id="pictureID"
+                      className="hidden"
+                      accept=".jpg,.png,.jpeg"
+                      ref={filePickerRef}
+                      onChange={pickedHandler}
+                    />
+                  </label>
                 </div>
               ) : (
                 <div className="w-full flex justify-center items-center pb-6 ">
